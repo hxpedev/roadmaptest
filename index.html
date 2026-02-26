@@ -9,162 +9,182 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    background: #1a1a2e;
+    background: #111a11;
     font-family: 'Press Start 2P', monospace;
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    padding: 24px;
-    background-image:
-      radial-gradient(ellipse at 50% 0%, rgba(34,197,94,0.08) 0%, transparent 60%),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Crect width='32' height='32' fill='none'/%3E%3Crect x='0' y='0' width='16' height='16' fill='%23ffffff' opacity='0.012'/%3E%3Crect x='16' y='16' width='16' height='16' fill='%23ffffff' opacity='0.012'/%3E%3C/svg%3E");
+    padding: 32px;
+    background-image: radial-gradient(ellipse at 50% 0%, rgba(34,197,94,0.07) 0%, transparent 65%);
   }
 
   .card {
-    background: #1d2b1d;
-    border: 4px solid #4a7c4a;
+    background: #152015;
+    border: 4px solid #3d6b3d;
     box-shadow: 
-      inset 0 0 0 2px #1a1a1a,
-      6px 6px 0px #0a0f0a,
-      0 0 40px rgba(34,197,94,0.1);
-    padding: 28px 32px;
+      inset 0 0 0 2px #0d140d,
+      8px 8px 0px #060d06,
+      0 0 60px rgba(34,197,94,0.08);
+    padding: 32px 36px;
     width: 100%;
-    max-width: 900px;
+    max-width: 980px;
   }
 
+  /* ── Header ── */
   .header {
     text-align: center;
-    margin-bottom: 20px;
-    padding-bottom: 14px;
-    border-bottom: 4px solid #2d4a2d;
+    margin-bottom: 24px;
+    padding-bottom: 18px;
+    border-bottom: 3px solid #233823;
+    position: relative;
   }
-
   .header::after {
     content: '';
     display: block;
     height: 2px;
-    background: #3a6a3a;
-    margin-top: 4px;
+    background: #2e5230;
+    margin-top: 3px;
   }
-
   .header-title {
-    font-size: 18px;
-    color: #4ade80;
-    letter-spacing: 2px;
-    text-shadow: 2px 2px 0 #166534, 0 0 20px rgba(74,222,128,0.4);
-    margin-bottom: 6px;
+    font-size: 20px;
+    color: #5dfc8e;
+    letter-spacing: 3px;
+    text-shadow: 3px 3px 0 #145228, 0 0 28px rgba(93,252,142,0.35);
+    margin-bottom: 8px;
   }
-
   .header-sub {
-    font-size: 7px;
+    font-size: 8px;
     color: #4a7c4a;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
   }
 
+  /* ── Grid ── */
   .grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
+    gap: 10px;
   }
 
+  /* ── Week card ── */
   .week {
-    background: #162216;
-    border: 3px solid #2d4a2d;
-    padding: 0 10px 12px;
+    background: #111c11;
+    border: 3px solid #263d26;
+    padding: 0 12px 14px;
     position: relative;
   }
 
+  /* top accent bar */
   .week::before {
     content: '';
     display: block;
-    height: 3px;
-    background: #2d4a2d;
-    margin: 0 -10px 10px;
+    height: 4px;
+    background: #263d26;
+    margin: 0 -12px 12px;
   }
 
-  .week.special { border-color: #856a1a; background: #1c1a10; }
-  .week.special::before { background: #4a3a10; }
+  .week.special          { border-color: #7a5e14; background: #171408; }
+  .week.special::before  { background: #5a4410; }
+  .week.finale           { border-color: #6e1515; background: #170a0a; grid-column: span 2; }
+  .week.finale::before   { background: #4e1010; }
 
-  .week.finale { border-color: #7a1a1a; background: #1c1010; grid-column: span 2; }
-  .week.finale::before { background: #4a1a1a; }
-
+  /* ── Week label & title ── */
   .week-label {
-    font-size: 6px;
-    color: #4a7c4a;
-    letter-spacing: 1px;
+    font-size: 8px;
+    letter-spacing: 1.5px;
     margin-bottom: 5px;
     display: block;
+    color: #4a8050;
   }
-  .week.special .week-label { color: #856a1a; }
-  .week.finale .week-label { color: #9a3020; }
+  .week.special .week-label { color: #9a7a20; }
+  .week.finale  .week-label { color: #a03030; }
 
   .week-title {
-    font-size: 7px;
-    color: #86efac;
-    margin-bottom: 10px;
-    line-height: 1.6;
+    font-size: 9px;
+    color: #a8f0bc;
+    margin-bottom: 12px;
+    line-height: 1.7;
+    border-bottom: 2px solid #1e3020;
+    padding-bottom: 8px;
   }
-  .week.special .week-title { color: #fbbf24; }
-  .week.finale .week-title { color: #f87171; }
+  .week.special .week-title { color: #fcd472; border-color: #3a2c08; }
+  .week.finale  .week-title { color: #fc8c8c; border-color: #3e1010; }
 
-  .event { margin-bottom: 8px; }
+  /* ── Events ── */
+  .event {
+    margin-bottom: 10px;
+    padding: 7px 8px;
+    background: rgba(255,255,255,0.03);
+    border-left: 3px solid #263d26;
+  }
   .event:last-child { margin-bottom: 0; }
 
+  .week.special .event { border-left-color: #5a4410; }
+  .week.finale  .event { border-left-color: #4e1010; }
+
   .event-day {
-    font-size: 6px;
-    color: #4a7c4a;
-    margin-bottom: 2px;
+    font-size: 7px;
+    color: #5a9060;
+    margin-bottom: 4px;
     display: block;
+    letter-spacing: 1px;
   }
-  .week.special .event-day { color: #856a1a; }
-  .week.finale .event-day { color: #7a2a2a; }
+  .week.special .event-day { color: #b08830; }
+  .week.finale  .event-day { color: #a04040; }
 
   .event-name {
-    font-size: 7px;
-    color: #d1fae5;
-    line-height: 1.6;
+    font-size: 8px;
+    color: #e8ffe8;
+    line-height: 1.7;
   }
-  .week.finale .event-name { color: #fecaca; }
+  .week.finale .event-name { color: #ffe8e8; }
 
   .note {
-    font-size: 6px;
-    color: #4a7c4a;
+    font-size: 7px;
+    color: #527052;
     display: block;
-    margin-top: 2px;
+    margin-top: 4px;
+    line-height: 1.6;
   }
-  .week.special .note { color: #856a1a; }
-  .week.finale .note { color: #7a2a2a; }
+  .week.special .note { color: #907040; }
+  .week.finale  .note { color: #904040; }
 
+  /* ── Badge ── */
   .badge {
     display: inline-block;
-    font-size: 5px;
-    background: #14532d;
-    color: #4ade80;
-    padding: 1px 4px;
-    border: 1px solid #166534;
-    margin-top: 3px;
+    font-size: 6px;
+    background: #0d3d20;
+    color: #5dfc8e;
+    padding: 3px 6px;
+    border: 1px solid #1a5c30;
+    margin-top: 5px;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
   }
-  .badge.red { background: #450a0a; color: #f87171; border-color: #7f1d1d; }
+  .badge.red {
+    background: #3d0d0d;
+    color: #fc8c8c;
+    border-color: #5c1a1a;
+  }
 
+  /* ── Footer ── */
   .footer {
     text-align: center;
-    margin-top: 16px;
-    padding-top: 12px;
-    border-top: 4px solid #2d4a2d;
+    margin-top: 20px;
+    padding-top: 14px;
+    border-top: 3px solid #233823;
   }
   .footer::before {
     content: '';
     display: block;
     height: 2px;
-    background: #3a6a3a;
-    margin-bottom: 12px;
-    margin-top: -16px;
+    background: #2e5230;
+    margin-bottom: 14px;
+    margin-top: -17px;
   }
-
   .footer-text {
-    font-size: 6px;
-    color: #2d4a2d;
+    font-size: 7px;
+    color: #3a5e3a;
     letter-spacing: 2px;
   }
 </style>
@@ -179,6 +199,7 @@
 
   <div class="grid">
 
+    <!-- Week 1 -->
     <div class="week special">
       <span class="week-label">WEEK 1</span>
       <div class="week-title">LAUNCH WEEK</div>
@@ -199,6 +220,7 @@
       </div>
     </div>
 
+    <!-- Week 2 -->
     <div class="week">
       <span class="week-label">WEEK 2</span>
       <div class="week-title">FIRST EXPANSION</div>
@@ -212,6 +234,7 @@
       </div>
     </div>
 
+    <!-- Week 3 -->
     <div class="week">
       <span class="week-label">WEEK 3</span>
       <div class="week-title">ECONOMY WEEK</div>
@@ -225,6 +248,7 @@
       </div>
     </div>
 
+    <!-- Week 4 -->
     <div class="week">
       <span class="week-label">WEEK 4</span>
       <div class="week-title">KING OF THE HILL</div>
@@ -235,6 +259,7 @@
       </div>
     </div>
 
+    <!-- Week 5 -->
     <div class="week">
       <span class="week-label">WEEK 5</span>
       <div class="week-title">TEAM WAR</div>
@@ -245,6 +270,7 @@
       </div>
     </div>
 
+    <!-- Week 6 -->
     <div class="week special">
       <span class="week-label">WEEK 6</span>
       <div class="week-title">THE END OPENS</div>
@@ -256,6 +282,7 @@
       </div>
     </div>
 
+    <!-- Week 7 -->
     <div class="week">
       <span class="week-label">WEEK 7</span>
       <div class="week-title">LATE GAME</div>
@@ -269,6 +296,7 @@
       </div>
     </div>
 
+    <!-- Week 8 -->
     <div class="week finale">
       <span class="week-label">WEEK 8</span>
       <div class="week-title">⚠ FINALE</div>

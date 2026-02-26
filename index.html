@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Season Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0d0d0f;
+    font-family: 'Crimson Pro', Georgia, serif;
+    color: #d4c9b0;
+    min-height: 100vh;
+    padding: 60px 40px;
+  }
+
+  .page {
+    max-width: 780px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  /* Background texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: 
+      radial-gradient(ellipse at 15% 10%, rgba(120, 80, 20, 0.12) 0%, transparent 50%),
+      radial-gradient(ellipse at 85% 90%, rgba(60, 40, 10, 0.15) 0%, transparent 50%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='4' fill='%230d0d0f'/%3E%3Crect x='0' y='0' width='1' height='1' fill='%23ffffff' opacity='0.015'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page { position: relative; z-index: 1; }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 56px;
+    position: relative;
+  }
+
+  .header::before, .header::after {
+    content: '';
+    display: block;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #8b6914, #c9a227, #8b6914, transparent);
+    margin: 16px 0;
+  }
+
+  .header-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 6px;
+    color: #8b6914;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .header-title {
+    font-family: 'Cinzel', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: #e8d5a3;
+    letter-spacing: 2px;
+    text-shadow: 0 0 40px rgba(201, 162, 39, 0.3);
+    line-height: 1.1;
+  }
+
+  .header-sub {
+    font-size: 17px;
+    color: #7a6e5a;
+    font-style: italic;
+    margin-top: 8px;
+    letter-spacing: 0.5px;
+  }
+
+  /* Week blocks */
+  .week {
+    margin-bottom: 36px;
+    position: relative;
+    padding-left: 28px;
+    border-left: 2px solid #2a2318;
+    transition: border-color 0.2s;
+  }
+
+  .week:last-child { margin-bottom: 0; }
+
+  .week::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 8px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #8b6914;
+    box-shadow: 0 0 8px rgba(201, 162, 39, 0.5);
+  }
+
+  /* Special weeks */
+  .week.highlight {
+    border-left-color: #8b6914;
+  }
+
+  .week.finale {
+    border-left-color: #7a1a1a;
+  }
+
+  .week.finale::before {
+    background: #c0392b;
+    box-shadow: 0 0 12px rgba(192, 57, 43, 0.6);
+  }
+
+  .week-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .week-number {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: #5a4e38;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .week-title {
+    font-family: 'Cinzel', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #c9a227;
+    letter-spacing: 1px;
+  }
+
+  .week.finale .week-title {
+    color: #e05c4a;
+  }
+
+  .divider-thin {
+    height: 1px;
+    background: linear-gradient(90deg, #2a2318, transparent);
+    margin-bottom: 14px;
+  }
+
+  /* Events */
+  .event {
+    display: flex;
+    gap: 0;
+    margin-bottom: 12px;
+    align-items: flex-start;
+  }
+
+  .event:last-child { margin-bottom: 0; }
+
+  .event-day {
+    font-family: 'Cinzel', serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #8b6914;
+    text-transform: uppercase;
+    min-width: 80px;
+    padding-top: 3px;
+  }
+
+  .event-content {
+    flex: 1;
+  }
+
+  .event-title {
+    font-size: 18px;
+    color: #e8d5a3;
+    font-weight: 400;
+    line-height: 1.3;
+  }
+
+  .event-desc {
+    font-size: 15px;
+    color: #6e6350;
+    font-style: italic;
+    margin-top: 3px;
+    line-height: 1.5;
+    padding-left: 1px;
+  }
+
+  .event-desc em {
+    color: #9a855a;
+    font-style: normal;
+  }
+
+  .tag {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    padding: 2px 8px;
+    border: 1px solid #3a2e1a;
+    color: #7a6540;
+    text-transform: uppercase;
+    margin-left: 8px;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+  }
+
+  .tag.reward {
+    border-color: #4a3a10;
+    color: #9a7820;
+  }
+
+  .tag.danger {
+    border-color: #4a1a1a;
+    color: #9a3020;
+  }
+
+  /* Footer */
+  .footer {
+    margin-top: 56px;
+    text-align: center;
+    position: relative;
+  }
+
+  .footer::before {
+    content: '';
+    display: block;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #3a2e1a, transparent);
+    margin-bottom: 20px;
+  }
+
+  .footer-text {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: #3a2e1a;
+    text-transform: uppercase;
+  }
+
+  /* Ornament */
+  .ornament {
+    text-align: center;
+    color: #3a2e1a;
+    font-size: 20px;
+    margin: 24px 0;
+    letter-spacing: 8px;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="header-eyebrow">Official Schedule</div>
+    <div class="header-title">Season Roadmap</div>
+    <div class="header-sub">Eight weeks of events, expansions & battles</div>
+  </div>
+
+  <!-- Week 1 -->
+  <div class="week highlight">
+    <div class="week-header">
+      <span class="week-number">Week 1</span>
+      <span class="week-title">Launch Week</span>
+    </div>
+    <div class="divider-thin"></div>
+    <div class="event">
+      <div class="event-day">Friday</div>
+      <div class="event-content">
+        <div class="event-title">Server Launch</div>
+        <div class="event-desc">Border: 2,500 blocks &nbsp;·&nbsp; Nether: <em>Closed</em> &nbsp;·&nbsp; End: <em>Closed</em></div>
+      </div>
+    </div>
+    <div class="event">
+      <div class="event-day">Saturday</div>
+      <div class="event-content">
+        <div class="event-title">Nether Opens <span class="tag reward">Custom Item</span></div>
+        <div class="event-desc">The Nether is now accessible. Attend the event to earn a custom item.</div>
+      </div>
+    </div>
+    <div class="event">
+      <div class="event-day">Sunday</div>
+      <div class="event-content">
+        <div class="event-title">Treasure Hunt <span class="tag reward">Custom Item</span></div>
+        <div class="event-desc">Hunt down hidden treasure across the map for a chance to win a custom item.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Week 2 -->
+  <div class="week">
+    <div class="week-header">
+      <span class="week-number">Week 2</span>
+      <span class="week-title">First Expansion</span>
+    </div>
+    <div class="divider-thin"></div>
+    <div class="event">
+      <div class="event-day">Friday</div>
+      <div class="event-content">
+        <div class="event-title">Border Expands → 4,000 blocks</div>
+        <div class="event-desc">The world opens up. Time to explore further and secure new territory.</div>
+      </div>
+    </div>
+    <div class="event">
+      <div class="event-day">Saturday</div>
+      <div class="event-content">
+        <div class="event-title">Boss Fight</div>
+        <div class="event-desc">A powerful boss spawns. Team up or go solo — defeat it for exclusive rewards.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Week 3 -->
+  <div class="week">
+    <div class="week-header">
+      <span class="week-number">Week 3</span>
+      <span class="week-title">Economy Week</span>
+    </div>
+    <div class="divider-thin"></div>
+    <div class="event">
+      <div class="event-day">Friday</div>
+      <div class="event-content">
+        <div class="event-title">Building Competition</div>
+        <div class="event-desc">Show off your building skills. Best build wins a prize.</div>
+      </div>
+    </div>
+    <div class="event">
+      <div class="event-day">Saturday</div>
+      <div class="event-content">
+        <div class="event-title">Border Expands → 5,000 blocks</div>
+        <div class="event-desc">Another expansion. New land, new resources, new opportunities.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Week 4 -->
+  <div class="week">
+    <div class="week-header">
+      <span class="week-number">Week 4</span>
+      <span class="week-title">King of the Hill</span>
+    </div>
+    <div class="divider-thin"></div>
+    <div class="event">
+      <div class="event-day">Weekend</div>
+      <div class="event-content">
+        <div class="event-title">King of the Hill</div>
+        <div class="event-desc">Hold the hill longer than anyone else. Last team or player standing on top wins.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Week 5 -->
+  <div class="week">
+    <div class="week-header">
+      <span class="week-number">Week 5</span>
+      <span class="week-title">Team War</span>
+    </div>
+    <div class="divider-thin"></div>
+    <div class="event">
+      <div class="event-day">Saturday</div>
+      <div class="event-content">
+        <div class="event-title">Team War</div>
+        <div class="event-desc">Gather your allies. All-out war between teams — fight for dominance.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Week 6 -->
+  <div class="week highlight">
+    <div class="week-header">
+      <span class="week-number">Week 6</span>
+      <span class="week-title">The End Opens</span>
+    </div>
+    <div class="divider-thin"></div>
+    <div class="event">
+      <div class="event-day">Saturday</div>
+      <div class="event-content">
+        <div class="event-title">🐉 End Opening Event <span class="tag reward">Custom Item</span></div>
+        <div class="event-desc">The End dimension is now open. Slay the Ender Dragon to claim a custom item.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Week 7 -->
+  <div class="week">
+    <div class="week-header">
+      <span class="week-number">Week 7</span>
+      <span class="week-title">Late Game</span>
+    </div>
+    <div class="divider-thin"></div>
+    <div class="event">
+      <div class="event-day">Friday</div>
+      <div class="event-content">
+        <div class="event-title">Hide & Seek</div>
+        <div class="event-desc">Hiders vs seekers. Don't get caught.</div>
+      </div>
+    </div>
+    <div class="event">
+      <div class="event-day">Saturday</div>
+      <div class="event-content">
+        <div class="event-title">Capture the Flag</div>
+        <div class="event-desc">Two teams, two flags. Steal theirs, protect yours.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Week 8 -->
+  <div class="week finale">
+    <div class="week-header">
+      <span class="week-number">Week 8</span>
+      <span class="week-title">Finale</span>
+    </div>
+    <div class="divider-thin"></div>
+    <div class="event">
+      <div class="event-day">Friday</div>
+      <div class="event-content">
+        <div class="event-title">1v1 Championship</div>
+        <div class="event-desc">The best players go head to head. Prove you're the strongest on the server.</div>
+      </div>
+    </div>
+    <div class="event">
+      <div class="event-day">Saturday</div>
+      <div class="event-content">
+        <div class="event-title">💀 End of World Event <span class="tag danger">Final</span></div>
+        <div class="event-desc">The border begins to shrink and won't stop. Fight, survive, and be the last one standing.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-text">Good luck to everyone &nbsp;·&nbsp; May the best player win</div>
+  </div>
+
+</div>
+</body>
+</html>
